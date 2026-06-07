@@ -142,3 +142,278 @@
     color: var(--color-foreground);
   }
 }
+
+/* Letters of Love theme */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Pacifico&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap');
+
+.love-page {
+  min-height: 100vh;
+  background: radial-gradient(ellipse at top, #1a1040 0%, #0a0620 50%, #050214 100%);
+  position: relative;
+  overflow-x: hidden;
+  font-family: 'Cormorant Garamond', serif;
+  color: #f4e9d8;
+}
+
+.stars, .stars2, .stars3 {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 6px 1px rgba(255,255,255,0.8);
+  animation: twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes float-soft {
+  0%, 100% { transform: translateY(0) rotate(var(--rot, 0deg)); }
+  50% { transform: translateY(-10px) rotate(var(--rot, 0deg)); }
+}
+
+.love-heading {
+  font-family: 'Pacifico', cursive;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  text-align: center;
+  background: linear-gradient(135deg, #ffd9a8 0%, #ff8fa3 50%, #ffb88c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 40px rgba(255, 180, 200, 0.4);
+  padding: 3rem 1rem 1rem;
+  position: relative;
+  z-index: 2;
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 150, 180, 0.5)); }
+  50% { filter: drop-shadow(0 0 35px rgba(255, 180, 200, 0.8)); }
+}
+
+.subtitle {
+  text-align: center;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: #d4b896;
+  opacity: 0.85;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.envelopes-area {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 1100px;
+  padding: 2rem 1rem;
+  z-index: 1;
+}
+
+.envelope {
+  position: absolute;
+  width: 220px;
+  height: 150px;
+  cursor: pointer;
+  perspective: 1000px;
+  animation: float-soft 6s ease-in-out infinite;
+  transition: transform 0.3s ease;
+  z-index: 2;
+}
+
+.envelope:hover {
+  transform: scale(1.05) rotate(var(--rot, 0deg));
+  z-index: 5;
+}
+
+.envelope.open {
+  z-index: 10;
+  animation: none;
+  transform: scale(1.15) rotate(0deg) !important;
+}
+
+.env-body {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, #f8ecd4 0%, #ecd9b0 100%);
+  border-radius: 6px;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,0.5),
+    0 0 20px rgba(255, 200, 150, 0.15),
+    inset 0 -2px 4px rgba(150, 100, 50, 0.2);
+  overflow: hidden;
+}
+
+.env-body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 49.5%, rgba(180,130,80,0.25) 50%, transparent 50.5%),
+              linear-gradient(45deg, transparent 49.5%, rgba(180,130,80,0.25) 50%, transparent 50.5%);
+}
+
+.env-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 75px;
+  background: linear-gradient(180deg, #f8ecd4 0%, #e6d0a3 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transition: transform 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  z-index: 3;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.envelope.open .env-flap {
+  transform: rotateX(180deg);
+}
+
+.wax-seal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #d63955 0%, #8b1a2b 70%, #5a0e1c 100%);
+  box-shadow:
+    0 3px 8px rgba(0,0,0,0.5),
+    inset -2px -2px 6px rgba(0,0,0,0.4),
+    inset 2px 2px 4px rgba(255,150,150,0.3);
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Pacifico', cursive;
+  color: #ffd9d9;
+  font-size: 1.2rem;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  transition: opacity 0.3s ease;
+}
+
+.envelope.open .wax-seal {
+  opacity: 0;
+}
+
+.letter {
+  position: absolute;
+  inset: 8px;
+  background: linear-gradient(180deg, #fff9ec 0%, #fbeed1 100%);
+  border-radius: 4px;
+  padding: 1rem;
+  font-family: 'Dancing Script', cursive;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: #5a2a3a;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease 0.3s;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  z-index: 2;
+  box-shadow: inset 0 0 20px rgba(180, 130, 100, 0.15);
+}
+
+.envelope.open .letter {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.envelope.open {
+  width: 320px;
+  height: 240px;
+  transition: width 0.5s ease, height 0.5s ease, transform 0.5s ease;
+}
+
+.full-letter-section {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  margin: 4rem auto;
+  padding: 3rem 2.5rem;
+  background: linear-gradient(180deg, #fff9ec 0%, #f6e6c4 100%);
+  border-radius: 12px;
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.6),
+    0 0 60px rgba(255, 180, 150, 0.2),
+    inset 0 0 40px rgba(180, 130, 100, 0.1);
+  font-family: 'Dancing Script', cursive;
+  color: #5a2a3a;
+  font-size: 1.35rem;
+  line-height: 1.8;
+  text-align: center;
+  border: 1px solid rgba(180, 130, 100, 0.3);
+}
+
+.full-letter-section h2 {
+  font-family: 'Pacifico', cursive;
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #b8324a 0%, #d4763a 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.heart-divider {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 1.5rem 0;
+  color: #d63955;
+  position: relative;
+  z-index: 2;
+}
+
+.footer-note {
+  text-align: center;
+  padding: 2rem 1rem 4rem;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.5rem;
+  color: #ffb88c;
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 0 20px rgba(255, 150, 180, 0.5);
+}
+
+@media (max-width: 768px) {
+  .envelopes-area {
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  .envelope {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    transform: rotate(var(--rot, 0deg));
+  }
+  .envelope.open {
+    width: 280px;
+    height: 220px;
+  }
+  .full-letter-section {
+    margin: 2rem 1rem;
+    padding: 2rem 1.5rem;
+    font-size: 1.15rem;
+  }
+}
